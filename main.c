@@ -2,60 +2,44 @@
 #include <stdlib.h>
 #include <windows.h>
 
-void maxdig(int*n,int*m)
+int maxdig(int n)
 {
-    int x=*n;
-    int max=*m;
-    if(x%10>max)
+    int max=n%10;
+    if(n>0)
     {
-        max=x%10;
-        x=x/10;
-        *n=x;
-        *m=max;
+        if(maxdig(n/10)>max)max=maxdig(n/10);
+        else;
     }
-    else
-    {
-        x=x/10;
-        *n=x;
-        *m=max;
-    }
-    if(x/10==0&x%10==0);
-    else
-    {
-        maxdig(&x,&max);
-        *n=x;
-        *m=max;
-    }
+    else;
+    return max;
 }
 
 void Task3()
 {
     printf("Задание 3\n");
-    int x,n,max;
+    int n,max;
     printf("Введите целое неотрицательное число\n");
     scanf("%d",&n);
-    x=n;
     max=0;
     if(n==0);
     else
     {
-        maxdig(&n,&max);
+        max=maxdig(n);
     }
-    printf("Max digit 0f %d=%d",x,max);
+    printf("Max digit 0f %d = %d",n,max);
 }
 
-void sum(int*f)
+int sum()
 {
-    int x=*f;
-    int y;
+    int x,y;
     scanf("%d",&y);
-    if(y==-1)*f=x;
+    if(y==-1);
     else
     {
         x=x+y;
-        sum(&x);
-        *f=x;
+        x+=sum();
     }
+    return x;
 }
 
 void Task5()
@@ -64,7 +48,7 @@ void Task5()
     int f=0;
     printf("Введите раздельно числа последовательности, по одному в строке\n");
     printf("\"-1\" - конец последовательности, в последовательность не входит\n");
-    sum(&f);
+    f=sum();
     printf("Сумма элементов = %d\n",f);
 }
 
@@ -72,20 +56,26 @@ int main()
 {
     SetConsoleOutputCP(1251);
     printf("Task 7\n");
-    printf("Введите номер задания(3,5)\n");
     int task;
-    scanf("%d",&task);
-    switch(task)
+    do
     {
-    case 3:
-        Task3();
-        break;
-    case 5:
-        Task5();
-        break;
-    default:
-        printf("Данное задание не выполнено");
-        break;
-    }
+        printf("Введите номер задания(0-выход;3,5)\n");
+        scanf("%d",&task);
+        switch(task)
+        {
+        case 0:
+            break;
+        case 3:
+            Task3();
+            break;
+        case 5:
+            Task5();
+            break;
+        default:
+            printf("Данное задание не выполнено");
+            break;
+        }
+        printf("\n");
+    }while(task!=0);
     return 0;
 }
