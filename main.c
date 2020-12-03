@@ -2,16 +2,16 @@
 #include <stdlib.h>
 #include <windows.h>
 
+int MAX(int a, int b)
+{
+    if(a>=b)return a;
+    else return b;
+}
+
 int maxdig(int n)
 {
-    int max=n%10;
-    if(n>0)
-    {
-        if(maxdig(n/10)>max)max=maxdig(n/10);
-        else;
-    }
-    else;
-    return max;
+    if(n==0)return 0;
+    else return MAX(n%10,maxdig(n/10));
 }
 
 void Task3()
@@ -20,26 +20,16 @@ void Task3()
     int n,max;
     printf("¬ведите целое неотрицательное число\n");
     scanf("%d",&n);
-    max=0;
-    if(n==0);
-    else
-    {
-        max=maxdig(n);
-    }
+    max=maxdig(n);
     printf("Max digit 0f %d = %d",n,max);
 }
 
 int sum()
 {
-    int x,y;
+    int y;
     scanf("%d",&y);
-    if(y==-1);
-    else
-    {
-        x=x+y;
-        x+=sum();
-    }
-    return x;
+    if(y==-1) return 0;
+    else return y+sum();
 }
 
 void Task5()
